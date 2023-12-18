@@ -3,7 +3,10 @@ from django. views.generic import View,CreateView,FormView,TemplateView
 from django.urls import reverse_lazy
 from socialmedia.forms import LoginForm,Registration,StudentProfileForm
 from socialmedia import forms
+from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+
+
 
 
 # Create your views here.
@@ -51,6 +54,19 @@ class UserProfilecreate(View):
     def get(self,request,*args,**kwargs):
         form=StudentProfileForm
         return render(request,"userprofile.html",{"form":form})
+    
+    def post(self,request,*args,**kwargs):
+        form=StudentProfileForm(request.POST,files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"successfully created!")
+
+            print("success")
+            return redirect('add-profile')
+        else:
+            print ("faild")
+            
+
 
     # template_name="userprofile.html"
     # form_class=UserProfile

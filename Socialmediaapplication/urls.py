@@ -20,7 +20,7 @@ from socialmedia import views
 
 urlpatterns = [ 
     path('admin/', admin.site.urls),
-    path("",views.LogininView.as_view(),name="Signin"),
+    path("login",views.LogininView.as_view(),name="Signin"),
     path("socialmedia/register",views.SignUpView.as_view(),name="Sign-up"),
     path("index",views.IndexView.as_view(),name='index'),
     path("Login",views.SignOutView.as_view(),name="Signout"),

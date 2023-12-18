@@ -8,11 +8,11 @@ class Registration(UserCreationForm):
         model=User
         fields=["username","first_name","email","password1","password2"]
         widgets={
-                "username":forms.TextInput({"class":"form-control"}),
-                "first_name":forms.TextInput({"class":"form-control"}),
-                "email":forms.EmailInput({"class":"form-control"}),
-                "password1":forms.TextInput({"class":"form-control"}),
-                "password2":forms.TextInput({"class":"form-control"})
+                "username":forms.TextInput(attrs={"class":"form-control"}),
+                "first_name":forms.TextInput(attrs={"class":"form-control"}),
+                "email":forms.EmailInput(attrs={"class":"form-control"}),
+                "password1":forms.TextInput(attrs={"class":"form-control"}),
+                "password2":forms.TextInput(attrs={"class":"form-control"})
             }
 
 
@@ -25,4 +25,5 @@ class LoginForm(forms.Form):
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model=UserProfile
-        fields="__all__"
+        exclude=("user",) 
+       
