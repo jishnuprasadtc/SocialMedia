@@ -1,0 +1,17 @@
+.bgimg{
+    background-image:url('../image/socialmedia.jpg')
+    
+}
+
+.port{
+    height: 100vh;
+}
+
+.regimg{
+    background-image: url("../image/regimg.jpg");
+}
+
+.btclr{
+    color:black;
+    background-color:rgb(240, 103, 103) ;
+}
