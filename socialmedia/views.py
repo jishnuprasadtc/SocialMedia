@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django. views.generic import View,CreateView,FormView,TemplateView
 from django.urls import reverse_lazy
-from socialmedia.forms import LoginForm,Registration,UserProfile
+from socialmedia.forms import LoginForm,Registration,StudentProfileForm
 from socialmedia import forms
 from django.contrib.auth import authenticate,login,logout
 
@@ -47,10 +47,14 @@ class IndexView(TemplateView):
     template_name="index.html"
 
 
-class UserProfilecreate(CreateView):
-    template_name="userprofile.html"
-    form_class=UserProfile
-    success_url=reverse_lazy('index')
+class UserProfilecreate(View):
+    def get(self,request,*args,**kwargs):
+        form=StudentProfileForm
+        return render(request,"userprofile.html",{"form":form})
+
+    # template_name="userprofile.html"
+    # form_class=UserProfile
+    # success_url=reverse_lazy('index')
 
 
 
