@@ -15,15 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from socialmedia import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [ 
     path('admin/', admin.site.urls),
-    path("login",views.LogininView.as_view(),name="Signin"),
-    path("socialmedia/register",views.SignUpView.as_view(),name="Sign-up"),
+    path("",views.LogininView.as_view(),name="Signin"),
+    path("socialmedia/register/",views.SignUpView.as_view(),name="Sign-up"),
     path("index",views.IndexView.as_view(),name='index'),
-    path("Login",views.SignOutView.as_view(),name="Signout"),
-    path("profile/add",views.UserProfilecreate.as_view(),name="add-profile")
-    
-]
+    path("Signout",views.SignOutView.as_view(),name="Signout"),
+    path("profile/add/",views.UserProfilecreate.as_view(),name="add-profile"),
+    path("profile/<int:pk>/",views.Profile.as_view(),name="profile-detail") , 
+    path("posteradd/",views.PostView.as_view(),name='post'),
+    path("postview/",views.PostList.as_view(),name="index1"),
+    path("postdelete/<int:pk>",views.PostdeleteView.as_view(),name="delete"),
+    path("comment/<int:pk>/add/",views.CommentCreateView.as_view(),name="cmt-add"),
+    path("api/", include("api.urls"))
+ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

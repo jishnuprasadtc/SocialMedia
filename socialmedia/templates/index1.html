@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+
+ {%block bodyblock%}
+ <div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+           {%if data%}
+           {%for post in data%}
+
+           <div class="card mb-3 shadow p-3 mb-5 bg-body-tertiary rounded " style="width:100%;">
+               <div class="row g-0">
+                   <div class="col-md-6">
+                       <div class="card-body">
+                           <h5 class="card-title">Activity</h5>
+                           <img src="{{post.postimage.url}}" alt="postimage" width="350px">
+                          
+                           <p>Title : {{post.title}}</p>
+                           <p>created_date : {{post.createddate}}</p>
+                           <button type="submit" class="btn btn-white"> <i class="fa-solid fa-heart"></i></button> <a href="{%url 'cmt-add' post.id%}"><i class="fa-solid fa-comment"></i></a> 
+                       
+                          
+   
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+
+           {%endfor%}
+           {%endif%}
+        </div>
+        <div class="col-4"></div>
+    </div>
+ </div>
+ {%endblock%}

@@ -7,7 +7,7 @@ class UserProfile(models.Model):
     bio=models.CharField(max_length=200)
     dob=models.DateField()
     ph=models.CharField(max_length=200)
-    user=models.ForeignKey(User,on_delete=models.DO_NOTHING)
+    user=models.ForeignKey(User,on_delete=models.DO_NOTHING,related_name="profile")
     city=models.CharField(max_length=200)
     pincode=models.PositiveIntegerField()
     activity=models.CharField(max_length=200)
@@ -16,12 +16,18 @@ class UserProfile(models.Model):
 class Post(models.Model):
     user=models.ForeignKey(User,models.DO_NOTHING,related_name="userpost")    
     title=models.CharField(max_length=200)
-    post=models.ImageField(upload_to="post",null=True)
+    postimage=models.ImageField(upload_to="post",null=True,blank=True)
     createddate=models.DateTimeField(auto_now_add=True)
     like=models.ManyToManyField(User,related_name="likedpost")
+    created_at=models.DateTimeField(auto_now=True,null=True)
+    updated_at=models.DateTimeField(auto_now_add=True,null=True)
+
 
 
 
 class Comment(models.Model):
     title=models.CharField(max_length=200)
-    like=models.ManyToManyField(User)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    post=models.ForeignKey(Post,on_delete=models.CASCADE)
+    created_at=models.DateTimeField(auto_now=True ,null=True)
+    updated_at=models.DateTimeField(auto_now_add=True,null=True)
